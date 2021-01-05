@@ -10,9 +10,13 @@ host = "a3w259c8e2kscd-ats.iot.us-east-1.amazonaws.com"
 port = 8883
 
 subscribe_topic = "theme/actuators/desired"
-publish_topic = "theme/sensors/reported"       
+publish_topic = "theme/sensors/reported"   
 
 def subscribe_callback(client, userdata, message):
+    # set temperature
+    # set volume
+    # set light
+    # curtains 
     print("Received a new message: ")
     print(message.payload)
     print("from topic: ")
