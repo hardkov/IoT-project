@@ -1,4 +1,4 @@
-from Controller import *
+from .Controller import *
 
 class ThermostatController(Controller):
     def __init__(self, name):
@@ -36,9 +36,9 @@ class ThermostatController(Controller):
     @occupied_heating_setpoint.setter
     def occupied_heating_setpoint(self, value):
         self._set('occupied_heating_setpoint', value)
-    
+
     @local_temperature.setter
-    def brightnlocal_temperatureess(self, value):
+    def local_temperature(self, value):
         self._set('local_temperature', value)
 
     @system_mode.setter

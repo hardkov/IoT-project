@@ -1,4 +1,4 @@
-from Controller import *
+from .Controller import *
 
 class CurtainsController(Controller):
     def __init__(self, name):
