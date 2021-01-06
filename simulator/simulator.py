@@ -30,7 +30,8 @@ def simulate(state, name):
 
             response = {}
             for key in contents.keys():
-                response[key] = state[key]
+                if key in state.keys():
+                    response[key] = state[key]
             client.publish(get_topic(name), json.dumps(response))
         except Exception:
             pass
