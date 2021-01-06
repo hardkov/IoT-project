@@ -41,3 +41,48 @@ def simulate(state, name):
     client.on_message = on_message
     finilize_connection()
 
+thermostat_name = "thermostat"
+thermostat_state = {
+        "occupied_heating_setpoint": 20,
+        "local_temperature": 0,
+        "system_mode": "off",
+        "running_state": "idle",
+        "local_temperature_calibration": 0
+}
+
+lamp_name = "lamp"
+lamp_state = {
+        "state": "OFF",
+        "brightness": 0,
+        "color_temp": 0,
+        "color_xy": {"x": 0, "y":0}
+}
+
+curtains_name = "curtains"
+curtains_state = {
+        "state": "OPEN",
+        "position": 100
+}
+
+def thermostat_run():
+    simulate(thermostat_state, thermostat_name)
+
+def lamp_run():
+    simulate(lamp_state, lamp_name)
+
+def curtains_run():
+    simulate(curtains_state, curtains_name)
+
+
+thermostat_thread = Thread(target=thermostat_run)
+lamp_thread = Thread(target=lamp_run)
+curtains_thread = Thread(target=curtains_run)
+
+thermostat_thread.start()
+lamp_thread.start()
+curtains_thread.start()
+
+# thermostat_thread.join()
+# lamp_thread.join()
+# curtains_thread.join()
+
