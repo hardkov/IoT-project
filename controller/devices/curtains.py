@@ -35,13 +35,15 @@ class curtainsController(object):
         self.mqtt.on_connect = on_connect
         self.mqtt.on_message = on_message
         self.state = {}
-        self.exposes = ['state']
-
-
+        self.exposes = ['state', 'position']
 
     @property
     def state(self):
         return self.state['state']
+
+    @property
+    def position(self):
+        return self.position['position']
 
     def update(self, payload):
         self.client.publish(get_set(self.name), json.dumps(payload))
@@ -55,3 +57,7 @@ class curtainsController(object):
     @state.setter
     def state(self, value):
         self._set('state', value)
+
+    @position.setter
+    def position(self, value):
+        self._set('position', value)
