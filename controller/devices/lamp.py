@@ -14,10 +14,11 @@ def connect():
 
 class LampController(object):
     def __init__(self, name):
-        self.mqtt, connect = connect()
+        self.client, connect_handle = connect()
         self.name = name
-        self.mqtt.on_connect = on_connect
-        self.mqtt.on_message = on_message
+        self.client.on_connect = on_connect
+        self.client.on_message = on_message
+        connect_handle()
         self.state = {}
         self.exposes = ['state', 'brightness', 'color_temp', 'color_xy']
 
