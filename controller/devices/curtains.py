@@ -9,11 +9,11 @@ class CurtainsController(Controller):
 
     @property
     def state(self):
-        return self.state['state']
+        return self.data['state']
 
     @property
     def position(self):
-        return self.position['position']
+        return self.data['position']
 
     @state.setter
     def state(self, value):
