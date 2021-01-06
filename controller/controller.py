@@ -32,7 +32,7 @@ def set_lamp(state):
     lamp.state = state["state"]
     lamp.brightness = state["brightness"]
     lamp.color_temp = state["color_temp"]
-    lamp.color_xy = state["cloor_xy"]
+    lamp.color_xy = state["color_xy"]
 
 def get_lamp():
     state = {}
@@ -40,7 +40,7 @@ def get_lamp():
     state["state"] = lamp.state
     state["brightness"] = lamp.brightness
     state["color_temp"] = lamp.color_temp
-    state["cloor_xy"] = lamp.color_xy
+    state["color_xy"] = lamp.color_xy
 
     return state
 
