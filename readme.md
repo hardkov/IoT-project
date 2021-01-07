@@ -53,3 +53,14 @@
 ## Installation
 
 ## Run
+```bash
+sudo service mosquitto start
+python simulator/simulator.py
+python controller/controller.py
+python app/app.py
+```
+
+To stop a mosquitto broker type:
+```bash
+sudo service mosquitto stop
+```
