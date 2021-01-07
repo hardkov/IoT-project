@@ -46,3 +46,10 @@
 * Thermostat - https://www.zigbee2mqtt.io/devices/Zen-01-W.html
 * Curtains - https://www.zigbee2mqtt.io/devices/W40CZ.html
 * Speaker - https://www.mediaexpert.pl/komputery-i-tablety/akcesoria-komputerowe/glosniki-komputerowe/glosniki-trust-remo-2-0-speaker-set?gclid=CjwKCAiAudD_BRBXEiwAudakX1TzMnU0TK4Qkwo9jno1q-ObeIbjTx-fI241vYgENOZcuECtPQPCXhoCSGoQAvD_BwE
+
+## System diagram
+<div style="text-align:center"><img src="readme_img/diag.png" /></div>
+
+## Installation
+
+## Run
