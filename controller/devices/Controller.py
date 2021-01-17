@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 import json
+from .deviceShadowClient import DeviceShadowClient
 
 BASE_TOPIC = "zigbee2mqtt/{name}"
 def set_topic(name):
@@ -39,6 +40,8 @@ class Controller(object):
         self.client.on_message = on_message
         finalize_connection()
 
+        self.deviceShadowClient = DeviceShadowClient(self.name)
+
     def update(self, payload):
         self.client.publish(set_topic(self.name), json.dumps(payload))
 
@@ -47,4 +50,7 @@ class Controller(object):
             key: value
         }
         self.update(payload)
+
+    def updateShadow(self):
+        self.deviceShadowClient.updateShadow(json.dumps({ "state": { "reported": self.data } }))
 

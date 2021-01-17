@@ -1,4 +1,5 @@
 .venv
 controller/config
+controller/devices/config
 app/config
 controller/devices/__pycache__/

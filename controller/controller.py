@@ -1,4 +1,5 @@
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+from AWSIoTPythonSDK.exception.AWSIoTExceptions import publishTimeoutException
 import time
 import json
 from devices.thermostat import ThermostatController
@@ -13,8 +14,8 @@ curtains = CurtainsController("curtains")
 def set_thermostat(state):
     thermostat.occupied_heating_setpoint = state["occupied_heating_setpoint"]
     thermostat.local_temperature = state["local_temperature"]
-    thermostat.system_mode = state["off"]
-    thermostat.running_state = state["idle"]
+    thermostat.system_mode = state["system_mode"]
+    thermostat.running_state = state["running_state"]
     thermostat.local_temperature_calibration = state["local_temperature_calibration"]
 
 def get_thermostat():
@@ -22,8 +23,8 @@ def get_thermostat():
 
     state["occupied_heating_setpoint"] = thermostat.occupied_heating_setpoint
     state["local_temperature"] = thermostat.local_temperature
-    state["off"] = thermostat.system_mode
-    state["idle"] = thermostat.running_state
+    state["system_mode"] = thermostat.system_mode
+    state["running_state"] = thermostat.running_state
     state["local_temperature_calibration"] = thermostat.local_temperature_calibration 
 
     return state
@@ -56,14 +57,6 @@ def get_curtains():
 
     return state
 
-def set_speaker(state):
-    pass
-
-def get_speaker():
-    state = {}
-
-    return state
-
 def subscribe_callback(client, userdata, message):
     message_dict = json.loads(message.payload)
 
@@ -74,6 +67,11 @@ def subscribe_callback(client, userdata, message):
     set_thermostat(thermostat_state)
     set_lamp(lamp_state)
     set_curtains(curtains_state)
+
+    thermostat.updateShadow()
+    lamp.updateShadow()
+    curtains.updateShadow()
+
 
 # AWS config
 clientId = "theme-controller"
@@ -106,14 +104,24 @@ time.sleep(2)
 # Publish to the same topic in a loop forever
 print("Starting infinite loop")
 
+def mqtt_publish(topic, msg, count = 0):
+    if count < 3: 
+        try:
+            myAWSIoTMQTTClient.publish(topic, msg, 1)
+        except publishTimeoutException as e:
+            count += 1
+            mqtt_publish(topic, msg, count)
+    else:
+        myAWSIoTMQTTClient.publish(topic, msg, 1)
+
 while True: 
     message = {}
     message['thermostat'] = get_thermostat()
     message['lamp'] = get_lamp()
     message['curtains'] = get_curtains()
-    message['speaker'] = get_speaker()
     messageJson = json.dumps(message)
 
-    myAWSIoTMQTTClient.publish(publish_topic, messageJson, 1)
+    # myAWSIoTMQTTClient.publish(publish_topic, messageJson, 1)
+    mqtt_publish(publish_topic, messageJson)
     
     time.sleep(3)
