@@ -50,6 +50,7 @@ class Controller(object):
             key: value
         }
         self.update(payload)
+        self.updateShadow()
 
     def updateShadow(self):
         self.deviceShadowClient.updateShadow(json.dumps({ "state": { "reported": self.data } }))

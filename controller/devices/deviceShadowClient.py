@@ -29,7 +29,6 @@ class DeviceShadowClient(object):
         self.shadowClient.connect()
 
         self.handler = self.shadowClient.createShadowHandlerWithName(self.clientId, True)
-        self.handler.shadowDelete(onResponse, 5)
 
     def updateShadow(self, jsonPayload):
         self.handler.shadowUpdate(jsonPayload, onResponse, 5)

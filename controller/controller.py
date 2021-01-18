@@ -68,10 +68,6 @@ def subscribe_callback(client, userdata, message):
     set_lamp(lamp_state)
     set_curtains(curtains_state)
 
-    thermostat.updateShadow()
-    lamp.updateShadow()
-    curtains.updateShadow()
-
 
 # AWS config
 clientId = "theme-controller"
