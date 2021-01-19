@@ -32,3 +32,6 @@ class DeviceShadowClient(object):
 
     def updateShadow(self, jsonPayload):
         self.handler.shadowUpdate(jsonPayload, onResponse, 5)
+
+    def getShadow(self, callback):
+        self.handler.shadowGet(callback, 5)

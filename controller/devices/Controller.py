@@ -41,6 +41,7 @@ class Controller(object):
         finalize_connection()
 
         self.deviceShadowClient = DeviceShadowClient(self.name)
+        self.getShadow()
 
     def update(self, payload):
         self.client.publish(set_topic(self.name), json.dumps(payload))
@@ -52,6 +53,31 @@ class Controller(object):
         self.update(payload)
         self.updateShadow()
 
+    def set_without_shadow_update(self, key, value):
+        payload = {
+            key: value
+        }
+        self.update(payload)
+
     def updateShadow(self):
         self.deviceShadowClient.updateShadow(json.dumps({ "state": { "reported": self.data } }))
+
+    def shadowCallback(self, payload, responseStatus, token):
+        if responseStatus == "accepted":
+            newData = json.loads(payload)
+            newData = newData.get("state")
+
+            if newData == None:
+                return
+
+            newData = newData.get("reported")
+
+            if newData == None:
+                return
+            
+            for key in newData.keys():
+                self.set_without_shadow_update(key, newData[key])
+
+    def getShadow(self):
+        self.deviceShadowClient.getShadow(self.shadowCallback)
 
