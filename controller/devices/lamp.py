@@ -4,12 +4,13 @@ class LampController(Controller):
     def __init__(self, name):
         super().__init__(
             {
-                    'state': "OFF",
+                    'state': "ON",
                     'brightness': 0,
                     'color_temp': 0,
                     'color_xy': {'x': 0, 'y':0}
             },
-            name
+            name,
+            ['brightness', 'state', 'color_temp', 'color_xy']
         )
 
     @property

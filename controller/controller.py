@@ -13,9 +13,9 @@ curtains = CurtainsController("curtains")
 
 def set_thermostat(state):
     thermostat.occupied_heating_setpoint = state["occupied_heating_setpoint"]
-    thermostat.local_temperature = state["local_temperature"]
+    #thermostat.local_temperature = state["local_temperature"]
     thermostat.system_mode = state["system_mode"]
-    thermostat.running_state = state["running_state"]
+    #thermostat.running_state = state["running_state"]
     thermostat.local_temperature_calibration = state["local_temperature_calibration"]
 
 def get_thermostat():

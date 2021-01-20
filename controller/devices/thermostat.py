@@ -6,11 +6,12 @@ class ThermostatController(Controller):
             {
                     'occupied_heating_setpoint': 20,
                     'local_temperature': 0,
-                    'system_mode': 'off',
+                    'system_mode': 'on',
                     'running_state': 'idle',
                     'local_temperature_calibration': 0
             },
-            name
+            name,
+            ['occupied_heating_setpoint', 'system_mode', 'local_temperature_calibration']
         )
 
     @property
@@ -37,17 +38,17 @@ class ThermostatController(Controller):
     def occupied_heating_setpoint(self, value):
         self._set('occupied_heating_setpoint', value)
 
-    @local_temperature.setter
-    def local_temperature(self, value):
-        self._set('local_temperature', value)
+    # @local_temperature.setter
+    # def local_temperature(self, value):
+    #     self._set('local_temperature', value)
 
     @system_mode.setter
     def system_mode(self, value):
         self._set('system_mode', value)
 
-    @running_state.setter
-    def running_state(self, value):
-        self._set('running_state', value)
+    # @running_state.setter
+    # def running_state(self, value):
+    #     self._set('running_state', value)
 
     @local_temperature_calibration.setter
     def local_temperature_calibration(self, value):

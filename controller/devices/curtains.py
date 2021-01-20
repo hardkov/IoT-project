@@ -4,7 +4,8 @@ class CurtainsController(Controller):
     def __init__(self, name):
         super().__init__(
             { 'state': "OPEN", 'position': 100 },
-            name
+            name,
+            ['state', 'position']
         )
 
     @property

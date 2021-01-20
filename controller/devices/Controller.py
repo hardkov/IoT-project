@@ -17,7 +17,7 @@ def connect():
     return cl, finalize
 
 class Controller(object):
-    def __init__(self, initial_data, name):
+    def __init__(self, initial_data, name, settable_keys):
         def on_connect(client, userdata, flags, rc):
             self.client.subscribe(get_topic(name))
 
@@ -34,6 +34,7 @@ class Controller(object):
 
         self.data = initial_data
         self.name = name
+        self.settable_keys = settable_keys
 
         self.client, finalize_connection = connect()
         self.client.on_connect = on_connect
@@ -76,7 +77,8 @@ class Controller(object):
                 return
             
             for key in newData.keys():
-                self.set_without_shadow_update(key, newData[key])
+                if key in self.settable_keys:
+                    self.set_without_shadow_update(key, newData[key])
 
     def getShadow(self):
         self.deviceShadowClient.getShadow(self.shadowCallback)
