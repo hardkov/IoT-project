@@ -52,7 +52,7 @@ class Controller(object):
             key: value
         }
         self.update(payload)
-        self.updateShadow()
+        self.updateShadow(payload)
 
     def set_without_shadow_update(self, key, value):
         payload = {
@@ -60,8 +60,8 @@ class Controller(object):
         }
         self.update(payload)
 
-    def updateShadow(self):
-        self.deviceShadowClient.updateShadow(json.dumps({ "state": { "reported": self.data } }))
+    def updateShadow(self, payload):
+        self.deviceShadowClient.updateShadow(json.dumps({ "state": { "reported": payload } }))
 
     def shadowCallback(self, payload, responseStatus, token):
         if responseStatus == "accepted":
