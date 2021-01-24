@@ -1,56 +1,13 @@
 # IoT Project - Smart Home
-
-## Policy
-**theme-controller-Policy** and **theme-application-Policy**
-<pre>   
-{  
-  "Version": "2012-10-17",  
-  "Statement": [  
-    {  
-      "Effect": "Allow",  
-      "Action": [  
-        "iot:Publish",  
-        "iot:Receive"  
-      ],  
-      "Resource": [  
-        "arn:aws:iot:us-east-1:478545304112:topic/theme/sensors/reported",  
-        "arn:aws:iot:us-east-1:478545304112:topic/theme/actuators/desired"  
-      ]  
-    },  
-    {  
-      "Effect": "Allow",  
-      "Action": [  
-        "iot:Subscribe"  
-      ],  
-      "Resource": [  
-        "arn:aws:iot:us-east-1:478545304112:topicfilter/theme/sensors/reported",  
-        "arn:aws:iot:us-east-1:478545304112:topicfilter/theme/actuators/desired"  
-      ]  
-    },  
-    {  
-      "Effect": "Allow",  
-      "Action": [  
-        "iot:Connect"  
-      ],  
-      "Resource": [  
-        "arn:aws:iot:us-east-1:478545304112:client/theme-controller",  
-        "arn:aws:iot:us-east-1:478545304112:client/theme-application"  
-      ]  
-    }  
-  ]  
-}  
-</pre>
+This project is a POC of a system allowing users to manage their home devices in order to change home themes.
 
 ## Devices 
 * Lamp - https://www.zigbee2mqtt.io/devices/AU-A1GSZ9RGBW.html
 * Thermostat - https://www.zigbee2mqtt.io/devices/Zen-01-W.html
 * Curtains - https://www.zigbee2mqtt.io/devices/W40CZ.html
-* Speaker - https://www.mediaexpert.pl/komputery-i-tablety/akcesoria-komputerowe/glosniki-komputerowe/glosniki-trust-remo-2-0-speaker-set?gclid=CjwKCAiAudD_BRBXEiwAudakX1TzMnU0TK4Qkwo9jno1q-ObeIbjTx-fI241vYgENOZcuECtPQPCXhoCSGoQAvD_BwE
 
 ## System diagram
 <div style="text-align:center"><img src="readme_img/diag.png" /></div>
-
-## Installation
 
 ## Run
 ```console
@@ -59,8 +16,4 @@ python simulator/simulator.py
 python controller/controller.py
 python app/app.py
 ```
-
-To stop a mosquitto broker type:
-```console
-sudo service mosquitto stop
-```
+Also you have to be running zigbee software, you can download it from https://www.zigbee2mqtt.io/.  
